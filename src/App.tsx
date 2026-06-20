@@ -28,7 +28,7 @@ export default function App() {
   const [totalSavedCo2, setTotalSavedCo2] = useState<number>(() => {
     try {
       const stored = localStorage.getItem("carbon_saved_co2");
-      return stored ? parseFloat(stored) : 4.5; // Start with small initial sprout metrics
+      return stored ? parseFloat(stored) : 4.5; 
     } catch {
       return 4.5;
     }
@@ -150,7 +150,7 @@ export default function App() {
               <span className="text-[9px] text-emerald-800 font-medium">Accumulated Carbon offset</span>
             </div>
 
-            {/* Custom Gamification Badge (Boost Alignment Index) */}
+            {/* Custom Gamification Badge */}
             <div className="flex flex-col gap-2 min-w-[150px] bg-gradient-to-br from-emerald-600 to-green-700 text-white p-4 rounded-xl text-center shadow-sm">
               <span className="text-[10px] uppercase font-bold text-emerald-200">Your Badge Level</span>
               <span className="text-sm font-black flex items-center justify-center gap-1 mt-1">
@@ -161,7 +161,7 @@ export default function App() {
           </div>
         </div>
 
-        {/* Gamified Eco-Challenge Card (Boost Problem Statement Alignment Factor) */}
+        {/* Gamified Eco-Challenge Card */}
         <section className="bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-100 rounded-2xl p-6 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4" aria-labelledby="challenge-heading">
           <div className="flex items-center gap-4 text-center sm:text-left flex-col sm:flex-row">
             <div className="w-12 h-12 bg-amber-500 rounded-full flex items-center justify-center text-white text-xl shadow-inner">🔥</div>
@@ -211,3 +211,5 @@ export default function App() {
         </div>
 
         {/* Row 6: History Table logs */}
+        <section className="bg-white rounded-2xl border border-slate-100 overflow-hidden shadow-sm" aria-labelledby="logs-heading">
+          <div className="p-6 border-b border-slate-100 flex items-center justify-between">
