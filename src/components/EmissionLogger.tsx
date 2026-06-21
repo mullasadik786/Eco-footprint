@@ -71,50 +71,56 @@ export default function EmissionLogger({ onAddActivity }: LoggerProps) {
   };
 
   return (
-    <div id="logger-form" className="bg-white rounded-2xl border border-slate-100 p-6 shadow-sm">
+    <div id="logger-form" className="bg-white rounded-2xl border border-slate-100 p-6 shadow-sm hover:shadow-md transition-all duration-300 text-left">
       <div className="flex items-center gap-2 mb-4">
         <PlusCircle className="text-emerald-600 w-5 h-5" />
-        <h3 className="font-bold text-slate-800 text-lg">Log Activity Emissions</h3>
+        <h3 className="font-bold text-slate-800 text-lg font-display">Log Activity Emissions</h3>
       </div>
 
       {/* Tabs list */}
-      <div className="flex border-b border-slate-100 mb-6 gap-1 p-0.5 bg-slate-50/80 rounded-lg">
+      <div className="flex border border-slate-200/50 mb-5 gap-1 p-1 bg-slate-50 rounded-xl">
         <button
+          type="button"
           onClick={() => { setActiveTab("energy"); setNumericValue(0); }}
-          className={`flex-1 flex items-center justify-center gap-2 py-2 text-xs font-semibold rounded-md transition-all ${
+          className={`flex-1 flex items-center justify-center gap-1.5 py-2 text-xs font-bold rounded-lg transition-all cursor-pointer ${
             activeTab === "energy"
-              ? "bg-white text-amber-600 shadow-sm border border-amber-100"
+              ? "bg-white text-amber-700 shadow-sm border border-slate-100"
               : "text-slate-500 hover:text-slate-800"
           }`}
         >
-          <Zap className="w-4 h-4" />
-          Household Energy
+          <Zap className="w-4 h-4 text-amber-500" />
+          <span className="hidden sm:inline">Energy</span>
+          <span className="sm:hidden">Energy</span>
         </button>
         <button
+          type="button"
           onClick={() => { setActiveTab("transport"); setNumericValue(0); }}
-          className={`flex-1 flex items-center justify-center gap-2 py-2 text-xs font-semibold rounded-md transition-all ${
+          className={`flex-1 flex items-center justify-center gap-1.5 py-2 text-xs font-bold rounded-lg transition-all cursor-pointer ${
             activeTab === "transport"
-              ? "bg-white text-red-600 shadow-sm border border-red-100"
+              ? "bg-white text-rose-700 shadow-sm border border-slate-100"
               : "text-slate-500 hover:text-slate-800"
           }`}
         >
-          <Car className="w-4 h-4" />
-          Travel & Mobility
+          <Car className="w-4 h-4 text-rose-500" />
+          <span className="hidden sm:inline">Travel</span>
+          <span className="sm:hidden">Travel</span>
         </button>
         <button
+          type="button"
           onClick={() => { setActiveTab("food_waste"); setNumericValue(0); }}
-          className={`flex-1 flex items-center justify-center gap-2 py-2 text-xs font-semibold rounded-md transition-all ${
+          className={`flex-1 flex items-center justify-center gap-1.5 py-2 text-xs font-bold rounded-lg transition-all cursor-pointer ${
             activeTab === "food_waste"
-              ? "bg-white text-emerald-600 shadow-sm border border-emerald-100"
+              ? "bg-white text-emerald-700 shadow-sm border border-slate-100"
               : "text-slate-500 hover:text-slate-800"
           }`}
         >
-          <Utensils className="w-4 h-4" />
-          Diet & Footprint
+          <Utensils className="w-4 h-4 text-emerald-500" />
+          <span className="hidden sm:inline">Diet</span>
+          <span className="sm:hidden">Diet</span>
         </button>
       </div>
 
-      <form onSubmit={handleAddLog} className="space-y-5">
+      <form onSubmit={handleAddLog} className="space-y-4">
         
         {/* Step 1: Sub category choices */}
         {activeTab === "energy" && (
@@ -122,26 +128,26 @@ export default function EmissionLogger({ onAddActivity }: LoggerProps) {
             <button
               type="button"
               onClick={() => setEnergyType("electricity")}
-              className={`p-3 rounded-xl border text-left transition-all ${
+              className={`p-3 rounded-xl border text-left transition-all shadow-sm cursor-pointer ${
                 energyType === "electricity"
-                  ? "border-amber-500 bg-amber-50/20 text-amber-950 font-medium"
-                  : "border-slate-100 bg-slate-50/50 hover:bg-slate-50 text-slate-600 text-xs"
+                  ? "border-amber-500 bg-amber-50/50 text-amber-850 font-semibold"
+                  : "border-slate-100 bg-white hover:bg-slate-50 text-slate-600 text-xs"
               }`}
             >
-              <div className="font-semibold text-sm">Electricity Grid</div>
-              <div className="text-[10px] text-slate-500 mt-1">Grid billing in kWh</div>
+              <div className="font-bold text-slate-800 text-sm">Electricity</div>
+              <div className="text-[10px] text-slate-450 mt-0.5">Billing in kWh</div>
             </button>
             <button
               type="button"
               onClick={() => setEnergyType("natural_gas")}
-              className={`p-3 rounded-xl border text-left transition-all ${
+              className={`p-3 rounded-xl border text-left transition-all shadow-sm cursor-pointer ${
                 energyType === "natural_gas"
-                  ? "border-amber-500 bg-amber-50/20 text-amber-950 font-medium"
-                  : "border-slate-100 bg-slate-50/50 hover:bg-slate-50 text-slate-600 text-xs"
+                  ? "border-amber-500 bg-amber-50/50 text-amber-850 font-semibold"
+                  : "border-slate-100 bg-white hover:bg-slate-50 text-slate-600 text-xs"
               }`}
             >
-              <div className="font-semibold text-sm">Natural Gas</div>
-              <div className="text-[10px] text-slate-500 mt-1">Heating gas therms</div>
+              <div className="font-bold text-slate-800 text-sm">Natural Gas</div>
+              <div className="text-[10px] text-slate-450 mt-0.5">Billing in therms</div>
             </button>
           </div>
         )}
@@ -149,22 +155,22 @@ export default function EmissionLogger({ onAddActivity }: LoggerProps) {
         {activeTab === "transport" && (
           <div className="grid grid-cols-3 gap-2">
             {[
-              { id: "car", label: "Automobile", sub: "Gas car (miles)" },
-              { id: "transit", label: "Public Transit", sub: "Buses/Trains (km)" },
-              { id: "flight", label: "Airline", sub: "Flights (hours)" }
+              { id: "car", label: "Auto", sub: "Gas car (mi)" },
+              { id: "transit", label: "Transit", sub: "Rail/bus (km)" },
+              { id: "flight", label: "Flight", sub: "Airlines (hrs)" }
             ].map((opt) => (
               <button
                 key={opt.id}
                 type="button"
                 onClick={() => setTransportType(opt.id as any)}
-                className={`p-2.5 rounded-xl border text-left transition-all ${
+                className={`p-2.5 rounded-xl border text-left transition-all shadow-sm cursor-pointer ${
                   transportType === opt.id
-                    ? "border-red-500 bg-red-50/20 text-red-950 font-medium"
-                    : "border-slate-100 bg-slate-50/50 hover:bg-slate-50 text-slate-600 text-xs"
+                    ? "border-rose-300 bg-rose-50/60 text-rose-800 font-semibold"
+                    : "border-slate-100 bg-white hover:bg-slate-50 text-slate-600 text-xs"
                 }`}
               >
-                <div className="font-semibold text-xs">{opt.label}</div>
-                <div className="text-[9px] text-slate-500 mt-0.5">{opt.sub}</div>
+                <div className="font-bold text-slate-800 text-xs">{opt.label}</div>
+                <div className="text-[9px] text-slate-400 mt-0.5">{opt.sub}</div>
               </button>
             ))}
           </div>
@@ -172,34 +178,34 @@ export default function EmissionLogger({ onAddActivity }: LoggerProps) {
 
         {activeTab === "food_waste" && (
           <div className="space-y-3">
-            <label className="text-xs font-semibold text-slate-600 block">Select Dietary Profile Type:</label>
+            <label className="text-xs font-bold text-slate-700 block">Select Dietary Profile Type:</label>
             <div className="grid grid-cols-2 gap-2">
               {[
-                { id: "meat_heavy", label: "Heavy Meat", sub: "Frequent red beef/pork" },
-                { id: "meat_average", label: "Average Meat", sub: "Moderate meat mix" },
-                { id: "vegetarian", label: "Vegetarian", sub: "Egg & dairy, no meat" },
-                { id: "vegan", label: "Vegan Plan", sub: "100% plant-based diet" }
+                { id: "meat_heavy", label: "Heavy Meat", sub: "Daily red meat" },
+                { id: "meat_average", label: "Average Meat", sub: "Moderate beef/poultry" },
+                { id: "vegetarian", label: "Vegetarian", sub: "Egg & dairy mix" },
+                { id: "vegan", label: "Vegan Plan", sub: "100% plant foods" }
               ].map((opt) => (
                 <button
                   key={opt.id}
                   type="button"
                   onClick={() => setDietType(opt.id as any)}
-                  className={`p-2.5 rounded-xl border text-left transition-all ${
+                  className={`p-2.5 rounded-xl border text-left transition-all shadow-sm cursor-pointer ${
                     dietType === opt.id
-                      ? "border-emerald-500 bg-emerald-50/20 text-emerald-950 font-medium"
-                      : "border-slate-100 bg-slate-50/50 hover:bg-slate-50 text-slate-600 text-xs"
+                      ? "border-emerald-300 bg-emerald-50 text-emerald-800 font-semibold"
+                      : "border-slate-100 bg-white hover:bg-slate-50 text-slate-600 text-xs"
                   }`}
                 >
-                  <div className="font-semibold text-xs">{opt.label}</div>
-                  <div className="text-[9px] text-slate-500 mt-0.5">{opt.sub}</div>
+                  <div className="font-bold text-slate-800 text-xs">{opt.label}</div>
+                  <div className="text-[9px] text-slate-450 mt-0.5">{opt.sub}</div>
                 </button>
               ))}
             </div>
 
-            <div className="flex flex-col gap-1 mt-2">
-              <label className="text-xs font-semibold text-slate-600 flex justify-between">
+            <div className="flex flex-col gap-1.5 mt-2">
+              <label className="text-xs font-bold text-slate-600 flex justify-between">
                 <span>Duration tracking:</span>
-                <span className="text-slate-900 font-bold">{daysCount} Days</span>
+                <span className="text-emerald-650 font-bold font-mono">{daysCount} Days</span>
               </label>
               <input
                 type="range"
@@ -207,7 +213,7 @@ export default function EmissionLogger({ onAddActivity }: LoggerProps) {
                 max="30"
                 value={daysCount}
                 onChange={(e) => setDaysCount(Number(e.target.value))}
-                className="w-full h-1 bg-slate-100 rounded-lg appearance-none cursor-pointer accent-emerald-600"
+                className="w-full h-1 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-emerald-600"
               />
             </div>
           </div>
@@ -216,50 +222,48 @@ export default function EmissionLogger({ onAddActivity }: LoggerProps) {
         {/* Enter Quantities */}
         {activeTab !== "food_waste" && (
           <div className="flex flex-col gap-1.5">
-            <label className="text-xs font-semibold text-slate-600 flex justify-between">
+            <label className="text-xs font-bold text-slate-600 flex justify-between">
               <span>Enter Quantities consumed / traveled:</span>
-              <span className="text-slate-900 font-bold">
+              <span className="text-emerald-700 font-bold font-mono">
                 {numericValue} {unit}
               </span>
             </label>
-            <div className="flex gap-2">
-              <input
-                type="number"
-                min="0"
-                step="any"
-                value={numericValue === 0 ? "" : numericValue}
-                onChange={(e) => setNumericValue(Math.max(0, parseFloat(e.target.value) || 0))}
-                placeholder={`e.g. 150 ${unit}`}
-                className="flex-1 bg-slate-50 border border-slate-100/50 rounded-xl px-4 py-2.5 text-slate-800 text-sm focus:outline-none focus:ring-1 focus:ring-emerald-500/50 focus:bg-white"
-                required
-              />
-            </div>
+            <input
+              type="number"
+              min="0"
+              step="any"
+              value={numericValue === 0 ? "" : numericValue}
+              onChange={(e) => setNumericValue(Math.max(0, parseFloat(e.target.value) || 0))}
+              placeholder={`e.g. 150 ${unit}`}
+              className="w-full bg-white border border-slate-200 rounded-xl px-4 py-2.5 text-slate-800 text-sm focus:outline-none focus:ring-1 focus:ring-emerald-500/20 focus:border-emerald-450"
+              required
+            />
           </div>
         )}
 
         {/* Enter Custom Title Description (Optional) */}
         <div className="flex flex-col gap-1.5">
-          <label className="text-xs font-semibold text-slate-600 block">Custom Label / Description (Optional):</label>
+          <label className="text-xs font-bold text-slate-600 block">Custom Description (Optional):</label>
           <input
             type="text"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            placeholder="e.g. Commute to town center, Utility bill..."
-            className="w-full bg-slate-50 border border-slate-100/50 rounded-xl px-4 py-2.5 text-slate-800 text-sm focus:outline-none focus:ring-1 focus:ring-emerald-500/50 focus:bg-white"
+            placeholder="e.g. Commute to downtown, Household billing..."
+            className="w-full bg-white border border-slate-200 rounded-xl px-4 py-2.5 text-slate-800 text-sm focus:outline-none focus:ring-1 focus:ring-emerald-500/20 focus:border-emerald-450"
           />
         </div>
 
         {/* Dynamic Live Counter Preview Card */}
-        <div className="bg-slate-50/50 p-4 rounded-xl border border-slate-100 flex items-center justify-between text-xs">
+        <div className="bg-emerald-50/40 p-4 rounded-xl border border-emerald-100 flex items-center justify-between text-xs">
           <div>
-            <span className="text-slate-400 block font-semibold uppercase tracking-wider text-[9px]">Calculated Footprint Impact</span>
-            <span className="text-base font-extrabold text-slate-800">
+            <span className="text-slate-400 block font-semibold uppercase tracking-wider text-[9px]">Calculated Log Impact</span>
+            <span className="text-base font-bold font-mono text-slate-800">
               +{co2e.toFixed(2)} kg CO₂e
             </span>
           </div>
           <div>
-            <span className="text-[9px] bg-slate-200 text-slate-700 font-bold px-2 py-1 rounded-full uppercase">
-              {activeTab} item
+            <span className="text-[9px] bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded-md uppercase border border-emerald-200/50 capitalize font-mono">
+              {activeTab.replace("_", " ")}
             </span>
           </div>
         </div>
@@ -268,7 +272,7 @@ export default function EmissionLogger({ onAddActivity }: LoggerProps) {
         <button
           type="submit"
           disabled={activeTab !== "food_waste" && numericValue <= 0}
-          className="w-full py-3 bg-slate-800 hover:bg-slate-900 disabled:bg-slate-200 disabled:text-slate-400 disabled:cursor-not-allowed text-white font-bold text-xs uppercase tracking-widest rounded-xl transition-all shadow-sm"
+          className="w-full py-3 bg-emerald-600 hover:bg-emerald-700 disabled:bg-slate-100 disabled:text-slate-400 disabled:cursor-not-allowed text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all shadow-sm cursor-pointer"
         >
           Add Log To Dashboard
         </button>

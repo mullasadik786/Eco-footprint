@@ -10,13 +10,13 @@ export default function ActionChecklist({ onAddSavedCarbon }: ActionChecklistPro
   
   // Icon selector helper
   const renderIcon = (iconName: string, category: string) => {
-    const specs = "w-5 h-5";
+    const specs = "w-4 h-4";
     const colors = 
       category === "energy" 
-        ? "text-amber-500" 
+        ? "text-amber-600" 
         : category === "transport" 
-          ? "text-red-500" 
-          : "text-emerald-500";
+          ? "text-rose-600" 
+          : "text-emerald-600";
           
     switch (iconName) {
       case "Sun": return <Sun className={`${specs} ${colors}`} />;
@@ -32,14 +32,14 @@ export default function ActionChecklist({ onAddSavedCarbon }: ActionChecklistPro
   };
 
   return (
-    <div id="checklist-section" className="bg-white rounded-2xl border border-slate-100 p-6 shadow-sm">
+    <div id="checklist-section" className="bg-white rounded-2xl border border-slate-100 p-6 shadow-sm hover:shadow-md transition-all duration-300 text-left">
       <div className="flex flex-col gap-1 mb-4">
         <div className="flex items-center gap-2">
           <Leaf className="text-emerald-600 w-5 h-5" />
-          <h3 className="font-bold text-slate-800 text-lg">Daily Eco Action Plan</h3>
+          <h3 className="font-bold text-slate-800 text-lg font-display">Daily Eco Action Plan</h3>
         </div>
-        <p className="text-xs text-slate-400">
-          Click to log sustainable habits you did today to immediately reduce your carbon print count &amp; nurture the Virtual Forest.
+        <p className="text-xs text-slate-500 leading-relaxed">
+          Log sustainable habits you practiced today to immediately offset your carbon intensity &amp; grow your Virtual Grove.
         </p>
       </div>
 
@@ -47,14 +47,14 @@ export default function ActionChecklist({ onAddSavedCarbon }: ActionChecklistPro
         {DEFAULT_ACTIONS.map((act) => (
           <div
             key={act.id}
-            className="flex flex-col justify-between p-4 rounded-xl border border-slate-50 bg-slate-50/20 hover:bg-slate-50/50 hover:border-slate-100 transition-all gap-4"
+            className="flex flex-col justify-between p-4 rounded-xl border border-slate-100 bg-slate-50/40 hover:bg-slate-50 hover:border-slate-200 transition-all gap-4"
           >
             <div className="flex gap-3">
-              <div className="p-2 bg-white rounded-lg shadow-sm self-start">
+              <div className="p-2 bg-white rounded-lg shadow-sm self-start border border-slate-100/80">
                 {renderIcon(act.icon, act.category)}
               </div>
-              <div>
-                <h4 className="font-semibold text-slate-800 text-xs sm:text-sm">
+              <div className="text-left">
+                <h4 className="font-bold text-slate-800 text-xs sm:text-sm">
                   {act.title}
                 </h4>
                 <p className="text-[11px] text-slate-400 leading-normal mt-0.5">
@@ -63,14 +63,14 @@ export default function ActionChecklist({ onAddSavedCarbon }: ActionChecklistPro
               </div>
             </div>
 
-            <div className="flex items-center justify-between border-t border-slate-100/40 pt-2.5">
-              <span className="text-[10px] sm:text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-md">
+            <div className="flex items-center justify-between border-t border-slate-100 pt-2.5">
+              <span className="text-[10px] sm:text-xs font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-100">
                 -{act.co2Saved.toFixed(2)} kg CO₂e
               </span>
               
               <button
                 onClick={() => onAddSavedCarbon(act.co2Saved, act.title)}
-                className="flex items-center gap-1 py-1.5 px-3 bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white rounded-lg text-[10px] font-bold uppercase tracking-wider transition-all shadow-sm"
+                className="flex items-center gap-1 py-1.5 px-3 bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white rounded-lg text-[10px] font-bold uppercase tracking-wider transition-all shadow-sm cursor-pointer"
               >
                 <Check className="w-3.5 h-3.5" />
                 Done
