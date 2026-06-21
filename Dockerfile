@@ -11,4 +11,5 @@ COPY --from=builder /app/node_modules ./node_modules
 COPY package*.json ./
 EXPOSE 8080
 ENV PORT=8080
+ENV NODE_ENV=production
 CMD ["node", "dist/server.cjs"]
